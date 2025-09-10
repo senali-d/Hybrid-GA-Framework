@@ -3,7 +3,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from config.setting import PROBLEMS, DEFAULT_GA_PARAMS
 
-PROBLEM = "knapsack"  # options: "tsp", "knapsack", "integer", "real"
+PROBLEM = "nurses"  # options: "tsp", "knapsack", "integer", "real"
 
 def main():
     cfg = PROBLEMS[PROBLEM]
@@ -19,7 +19,7 @@ def main():
         mutation_prob=ga_params["P_MUTATION"],
         maximize=cfg["maximize"],
         hall_of_fame_size=ga_params["HALL_OF_FAME_SIZE"],
-        seed=42,
+        seed=ga_params["SEED"],
     )
 
     best, fitness, logbook = ga.run()
