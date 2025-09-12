@@ -59,7 +59,7 @@ class BaseGA:
             self.toolbox.register("individual", tools.initRepeat, creator.Individual,
                                   self.toolbox.attr_gene, n=self.individual_size)
             self.toolbox.register("mate", tools.cxTwoPoint)
-            self.toolbox.register("mutate", tools.mutUniformInt, low=low, up=high, indpb=0.2)
+            self.toolbox.register("mutate", tools.mutUniformInt, low=low, up=high, indpb=0.1/self.individual_size)
 
         elif self.chromosome_type == "permutation":
             self.toolbox.register("randomOrder", random.sample, range(self.individual_size), self.individual_size)

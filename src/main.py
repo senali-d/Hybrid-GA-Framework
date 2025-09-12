@@ -2,12 +2,15 @@ from ga.base_ga import BaseGA
 import seaborn as sns
 import matplotlib.pyplot as plt
 from config.setting import PROBLEMS, DEFAULT_GA_PARAMS
+# from src.problems.timetabling import TimetablingProblem
 
-PROBLEM = "nurses"  # options: "tsp", "knapsack", "integer", "real"
+PROBLEM = "timetabling"  # options: "tsp", "knapsack", "nurses", "timetabling", "integer", "real"
 
 def main():
     cfg = PROBLEMS[PROBLEM]
     ga_params = DEFAULT_GA_PARAMS
+
+    extra = cfg.get("extra_params", lambda: {})()
 
     ga = BaseGA(
         fitness_func=cfg["fitness_func"],
@@ -20,6 +23,7 @@ def main():
         maximize=cfg["maximize"],
         hall_of_fame_size=ga_params["HALL_OF_FAME_SIZE"],
         seed=ga_params["SEED"],
+        **extra
     )
 
     best, fitness, logbook = ga.run()
