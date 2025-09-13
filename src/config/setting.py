@@ -1,25 +1,30 @@
-from problems.timetabling import TimetablingProblem
 from src.ga.tsp import tsp_fitness, tsp_instance
 from src.ga.knapsack import knapsack_fitness, knapsack
 from src.ga.nurses import nurses_fitness, nsp
 from src.ga.timetabling import timetable_fitness, timetable_instance
+from src.ga.rosenbrock import rosenbrock_fitness, rosenbrock
+from src.problems.timetabling import TimetablingProblem
 
 DEFAULT_GA_PARAMS = {
     # tsp
     # "POPULATION_SIZE": 200,
     # "MAX_GENERATIONS": 300,
 
-    # knapsack
+    # rosenbrock
     # "POPULATION_SIZE": 50,
     # "MAX_GENERATIONS": 50,
+
+    # knapsack
+    "POPULATION_SIZE": 50,
+    "MAX_GENERATIONS": 100,
 
     # nursing
     # "POPULATION_SIZE": 300,
     # "MAX_GENERATIONS": 200,
 
     # timetabling
-    "POPULATION_SIZE": 300,
-    "MAX_GENERATIONS": 200,
+    # "POPULATION_SIZE": 150,
+    # "MAX_GENERATIONS": 600,
 
     "HALL_OF_FAME_SIZE": 30,
     # "HALL_OF_FAME_SIZE": 1,
@@ -67,4 +72,13 @@ PROBLEMS = {
             "int_range": (0, TimetablingProblem(HARD_CONSTRAINT_PENALTY).numRooms * TimetablingProblem(HARD_CONSTRAINT_PENALTY).numTimeslots - 1)
         }
     },
+    "rosenbrock": {
+        "fitness_func": rosenbrock_fitness,
+        "individual_size": len(rosenbrock),
+        "chromosome_type": "real",
+        "maximize": False,
+        "plot_func": rosenbrock.plotData,
+        "stats": ("min", "avg"),
+        "real_range": (-5, 5),
+    }
 }

@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from config.setting import PROBLEMS, DEFAULT_GA_PARAMS
 # from src.problems.timetabling import TimetablingProblem
 
-PROBLEM = "timetabling"  # options: "tsp", "knapsack", "nurses", "timetabling", "integer", "real"
+PROBLEM = "rosenbrock"  # options: "tsp", "knapsack", "nurses", "timetabling", "rosenbrock, "integer", "real"
 
 def main():
     cfg = PROBLEMS[PROBLEM]
