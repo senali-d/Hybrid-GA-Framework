@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Knapsack01Problem:
     """This class encapsulates the Knapsack 0-1 Problem from RosettaCode.org
     """
@@ -63,7 +66,7 @@ class Knapsack01Problem:
                 totalValue += zeroOneList[i] * value
         return totalValue
 
-    def plotData(self, zeroOneList):
+    def printItems(self, zeroOneList):
         """
         Prints the selected items in the list, while ignoring items that will cause the accumulating weight to exceed the maximum weight
         :param zeroOneList: a list of 0/1 values corresponding to the list of the problem's items. '1' means that item was selected.
@@ -78,3 +81,18 @@ class Knapsack01Problem:
                     totalValue += value
                     print(f" - Adding {item}: weight = {weight}, value = {value}, accumulated weight = {totalWeight}, accumulated value = {totalValue}")
         print(f"- Total weight = {totalWeight}, Total value = {totalValue}")
+
+# testing the class:
+def main():
+    # create a problem instance:
+    knapsack = Knapsack01Problem()
+
+    # creaete a random solution and evaluate it:
+    randomSolution = np.random.randint(2, size=len(knapsack))
+    print("Random Solution = ")
+    print(randomSolution)
+    knapsack.printItems(randomSolution)
+
+
+if __name__ == "__main__":
+    main()

@@ -50,7 +50,7 @@ PROBLEMS = {
         "individual_size": len(knapsack),
         "chromosome_type": "binary",
         "maximize": True,
-        "plot_func": knapsack.plotData,
+        "plot_func": knapsack.printItems,
         "stats": ("max", "avg"),
     },
     "nurses": {
@@ -58,7 +58,7 @@ PROBLEMS = {
         "individual_size": len(nsp),
         "chromosome_type": "binary",
         "maximize": False,
-        "plot_func": nsp.plotData,
+        "plot_func": nsp.printScheduleInfo,
         "stats": ("min", "avg"),
     },
     "timetabling": {
@@ -66,7 +66,7 @@ PROBLEMS = {
         "individual_size": len(timetable_instance),
         "chromosome_type": "integer",
         "maximize": False,
-        "plot_func": timetable_instance.plotData,
+        "plot_func": timetable_instance.printSchedule,
         "stats": ("min", "avg"),
         "extra_params": lambda: {
             "int_range": (0, TimetablingProblem(HARD_CONSTRAINT_PENALTY).numRooms * TimetablingProblem(HARD_CONSTRAINT_PENALTY).numTimeslots - 1)
@@ -77,7 +77,7 @@ PROBLEMS = {
         "individual_size": len(rosenbrock),
         "chromosome_type": "real",
         "maximize": False,
-        "plot_func": rosenbrock.plotData,
+        "plot_func": rosenbrock.printSolution,
         "stats": ("min", "avg"),
         "real_range": (-5, 5),
     }

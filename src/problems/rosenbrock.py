@@ -38,7 +38,7 @@ class RosenbrockProblem:
       result += self.b * (x[i + 1] - x[i] ** 2) ** 2 + (self.a - x[i]) ** 2
     return result,
 
-  def plotData(self, solution):
+  def printSolution(self, solution):
     """
     Prints information about the solution and its fitness
     :param solution: a list of real values representing the point
@@ -60,3 +60,37 @@ class RosenbrockProblem:
 
     print(f" - Global minimum at: {[self.a] * self.dimensions}")
     print(f" - Global minimum value: 0.0")
+
+
+# testing the class:
+def main():
+    # Create Rosenbrock problem instance
+    rosenbrock = RosenbrockProblem(dimensions=2, a=1, b=100)
+
+    # Test with some solutions
+    print("=== Testing Rosenbrock Function ===")
+
+    # Global minimum
+    optimal_solution = [1.0, 1.0]
+    print("\n1. Global minimum:")
+    rosenbrock.printSolution(optimal_solution)
+
+    # Random solution
+    random_solution = [0.5, -1.2]
+    print("\n2. Random solution:")
+    rosenbrock.printSolution(random_solution)
+
+    # Another test point
+    test_solution = [0.0, 0.0]
+    print("\n3. Test at origin:")
+    rosenbrock.printSolution(test_solution)
+
+    # Test fitness function directly
+    print(f"\n4. Fitness values:")
+    print(f"   Optimal: {rosenbrock.fitness(optimal_solution)}")
+    print(f"   Random: {rosenbrock.fitness(random_solution)}")
+    print(f"   Origin: {rosenbrock.fitness(test_solution)}")
+
+
+if __name__ == "__main__":
+    main()

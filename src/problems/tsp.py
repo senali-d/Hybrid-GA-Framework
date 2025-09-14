@@ -142,3 +142,26 @@ class TravelingSalesmanProblem:
         plt.plot(*zip(*locs), linestyle='-', color='blue')
 
         return plt
+
+# testing the class:
+def main():
+    # create a problem instance:
+    tsp = TravelingSalesmanProblem("bayg29")
+
+    # generate a random solution and evaluate it:
+    #randomSolution = random.sample(range(len(tsp)), len(tsp))
+
+    # see http://elib.zib.de/pub/mp-testdata/tsp/tsplib/tsp/bayg29.opt.tour
+    optimalSolution = [0, 27, 5, 11, 8, 25, 2, 28, 4, 20, 1, 19, 9, 3, 14, 17, 13, 16, 21, 10, 18, 24, 6, 22, 7, 26, 15, 12, 23]
+
+    print("Problem name: " + tsp.name)
+    print("Optimal solution = ", optimalSolution)
+    print("Optimal distance = ", tsp.getTotalDistance(optimalSolution))
+
+    # plot the solution:
+    plot = tsp.plotData(optimalSolution)
+    plot.show()
+
+
+if __name__ == "__main__":
+    main()

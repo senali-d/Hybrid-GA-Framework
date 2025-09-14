@@ -230,7 +230,7 @@ class TimetablingProblem:
         return True
 
     # ========== VISUALIZATION ==========
-    def plotData(self, timetable):
+    def printSchedule(self, timetable):
         """
         Prints the schedule and violations details
         :param timetable: a list of (moduleIdx, roomIdx, timeslotIdx)
@@ -275,3 +275,19 @@ class TimetablingProblem:
 
         # Overall validity
         print("Timetable is valid =", self.isValidTimetable(formatted_timetable))
+
+# testing the class:
+def main():
+    problem = TimetablingProblem(10)
+
+    np.random.seed(42)
+    timetable = [
+        (i, np.random.randint(problem.numRooms), np.random.randint(problem.numTimeslots))
+        for i in range(problem.numModules)
+    ]
+
+    problem.printSchedule(timetable)
+    print("\nTotal Cost =", problem.getCost(timetable))
+
+if __name__ == "__main__":
+    main()

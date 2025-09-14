@@ -153,7 +153,7 @@ class NurseSchedulingProblem:
 
         return violations
 
-    def plotData(self, schedule):
+    def printScheduleInfo(self, schedule):
         """
         Prints the schedule and violations details
         :param schedule: a list of binary values describing the given schedule
@@ -181,3 +181,22 @@ class NurseSchedulingProblem:
         print("Shift Preference Violations = ", shiftPreferenceViolations)
         print()
 
+# testing the class:
+def main():
+
+    # create a problem instance:
+    nurses = NurseSchedulingProblem(10)
+
+    np.random.seed(42)
+    randomSolution = np.random.randint(2, size=len(nurses))
+    print("Random Solution = ")
+    print(randomSolution)
+    print()
+
+    nurses.printScheduleInfo(randomSolution)
+
+    print("Total Cost = ", nurses.getCost(randomSolution))
+
+
+if __name__ == "__main__":
+    main()
