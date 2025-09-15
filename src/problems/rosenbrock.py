@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import pyplot as plt
 
 
 class RosenbrockProblem:
@@ -49,7 +50,7 @@ class RosenbrockProblem:
     print(f" - Dimensions: {self.dimensions}")
     print(f" - Parameters: a = {self.a}, b = {self.b}")
     print(f" - Solution point: {solution}")
-    print(f" - Function value: {fitness_value}")
+    print(f" - Function value: {fitness_value[0]:.6f}")
 
     # For 2D case, provide additional information
     if self.dimensions == 2:
@@ -87,9 +88,9 @@ def main():
 
     # Test fitness function directly
     print(f"\n4. Fitness values:")
-    print(f"   Optimal: {rosenbrock.fitness(optimal_solution)}")
-    print(f"   Random: {rosenbrock.fitness(random_solution)}")
-    print(f"   Origin: {rosenbrock.fitness(test_solution)}")
+    print(f"   Optimal: {rosenbrock.fitness(optimal_solution)[0]:.6f}")
+    print(f"   Random: {rosenbrock.fitness(random_solution)[0]:.6f}")
+    print(f"   Origin: {rosenbrock.fitness(test_solution)[0]:.6f}")
 
 
 if __name__ == "__main__":
