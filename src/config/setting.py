@@ -11,12 +11,12 @@ DEFAULT_GA_PARAMS = {
     # "MAX_GENERATIONS": 300,
 
     # rosenbrock
-    # "POPULATION_SIZE": 50,
-    # "MAX_GENERATIONS": 50,
+    "POPULATION_SIZE": 100,
+    "MAX_GENERATIONS": 10000,
 
     # knapsack
-    "POPULATION_SIZE": 50,
-    "MAX_GENERATIONS": 100,
+    # "POPULATION_SIZE": 50,
+    # "MAX_GENERATIONS": 100,
 
     # nursing
     # "POPULATION_SIZE": 300,
