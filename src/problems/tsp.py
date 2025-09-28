@@ -156,7 +156,7 @@ def main():
 
     print("Problem name: " + tsp.name)
     print("Optimal solution = ", optimalSolution)
-    print("Optimal distance = ", tsp.getTotalDistance(optimalSolution))
+    print("Optimal distance = ", tsp.fitness(optimalSolution))
 
     # plot the solution:
     plot = tsp.plotData(optimalSolution)
