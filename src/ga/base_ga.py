@@ -40,7 +40,7 @@ class BaseGA:
 
         self.toolbox = base.Toolbox()
         self._setup_encoding()
-        self.toolbox.register("populationCreator", tools.initRepeat, list, self.toolbox.individualCreator)
+        self.toolbox.register("population", tools.initRepeat, list, self.toolbox.individualCreator)
 
         self.toolbox.register("evaluate", self.fitness_func)
         self.toolbox.register("select", tools.selRoulette)
