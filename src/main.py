@@ -2,9 +2,11 @@ from ga.base_ga import BaseGA
 import seaborn as sns
 import matplotlib.pyplot as plt
 from config.setting import PROBLEMS, DEFAULT_GA_PARAMS
+
 # from src.problems.timetabling import TimetablingProblem
 
 PROBLEM = "rosenbrock"  # options: "tsp", "knapsack", "nurses", "timetabling", "rosenbrock, "integer", "real"
+
 
 def main():
     cfg = PROBLEMS[PROBLEM]
@@ -17,11 +19,11 @@ def main():
         individual_size=cfg["individual_size"],
         chromosome_type=cfg["chromosome_type"],
         population_size=ga_params["POPULATION_SIZE"],
-        ngen=ga_params['MAX_GENERATIONS'],
-        crossover_prob=ga_params['P_CROSSOVER'],
+        ngen=ga_params["MAX_GENERATIONS"],
+        crossover_prob=ga_params["P_CROSSOVER"],
         mutation_prob=ga_params["P_MUTATION"],
         maximize=cfg["maximize"],
-        **extra
+        **extra,
     )
 
     logbook = ga.run()
@@ -33,12 +35,13 @@ def main():
     # Plot statistics
     plt.figure()
     sns.set_style("whitegrid")
-    plt.plot(values1, color='red') #min/max
-    plt.plot(values2, color='green') #avg
-    plt.xlabel('Generation')
+    plt.plot(values1, color="red")  # min/max
+    plt.plot(values2, color="green")  # avg
+    plt.xlabel("Generation")
     plt.ylabel(f"{stat1.capitalize()} / {stat2.capitalize()} Fitness")
     plt.title(f"{stat1.capitalize()} and {stat2.capitalize()} Fitness over Generations")
     plt.show()
+
 
 if __name__ == "__main__":
     main()

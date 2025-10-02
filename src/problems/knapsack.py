@@ -2,8 +2,7 @@ import numpy as np
 
 
 class Knapsack01Problem:
-    """This class encapsulates the Knapsack 0-1 Problem from RosettaCode.org
-    """
+    """This class encapsulates the Knapsack 0-1 Problem from RosettaCode.org"""
 
     def __init__(self):
 
@@ -21,8 +20,7 @@ class Knapsack01Problem:
         return len(self.items)
 
     def __initData(self):
-        """initializes the RosettaCode.org knapsack 0-1 problem data
-        """
+        """initializes the RosettaCode.org knapsack 0-1 problem data"""
         self.items = [
             ("map", 9, 150),
             ("compass", 13, 35),
@@ -45,7 +43,7 @@ class Knapsack01Problem:
             ("sunglasses", 7, 20),
             ("towel", 18, 12),
             ("socks", 4, 50),
-            ("book", 30, 10)
+            ("book", 30, 10),
         ]
 
         self.maxCapacity = 400
@@ -79,8 +77,11 @@ class Knapsack01Problem:
                 if zeroOneList[i] > 0:
                     totalWeight += weight
                     totalValue += value
-                    print(f" - Adding {item}: weight = {weight}, value = {value}, accumulated weight = {totalWeight}, accumulated value = {totalValue}")
+                    print(
+                        f" - Adding {item}: weight = {weight}, value = {value}, accumulated weight = {totalWeight}, accumulated value = {totalValue}"
+                    )
         print(f"- Total weight = {totalWeight}, Total value = {totalValue}")
+
 
 # testing the class:
 def main():

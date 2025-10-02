@@ -9,23 +9,18 @@ DEFAULT_GA_PARAMS = {
     # tsp
     "POPULATION_SIZE": 30,
     "MAX_GENERATIONS": 50,
-
     # rosenbrock
     # "POPULATION_SIZE": 100,
     # "MAX_GENERATIONS": 100,
-
     # knapsack
     # "POPULATION_SIZE": 50,
     # "MAX_GENERATIONS": 100,
-
     # nursing
     # "POPULATION_SIZE": 300,
     # "MAX_GENERATIONS": 200,
-
     # timetabling
     # "POPULATION_SIZE": 150,
     # "MAX_GENERATIONS": 600,
-
     "P_CROSSOVER": 0.6,
     "P_MUTATION": 0.1,
     "SEED": 42,
@@ -66,8 +61,13 @@ PROBLEMS = {
         "plot_func": timetable_instance.printSchedule,
         "stats": ("min", "avg"),
         "extra_params": lambda: {
-            "int_range": (0, TimetablingProblem(HARD_CONSTRAINT_PENALTY).numRooms * TimetablingProblem(HARD_CONSTRAINT_PENALTY).numTimeslots - 1)
-        }
+            "int_range": (
+                0,
+                TimetablingProblem(HARD_CONSTRAINT_PENALTY).numRooms
+                * TimetablingProblem(HARD_CONSTRAINT_PENALTY).numTimeslots
+                - 1,
+            )
+        },
     },
     "rosenbrock": {
         "fitness_func": rosenbrock_fitness,
@@ -77,5 +77,5 @@ PROBLEMS = {
         "plot_func": rosenbrock.printSolution,
         "stats": ("min", "avg"),
         "real_range": (-5, 5),
-    }
+    },
 }

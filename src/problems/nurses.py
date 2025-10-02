@@ -2,8 +2,7 @@ import numpy as np
 
 
 class NurseSchedulingProblem:
-    """This class encapsulates the Nurse Scheduling problem
-    """
+    """This class encapsulates the Nurse Scheduling problem"""
 
     def __init__(self, hardConstraintPenalty):
         """
@@ -12,10 +11,19 @@ class NurseSchedulingProblem:
         self.hardConstraintPenalty = hardConstraintPenalty
 
         # list of nurses:
-        self.nurses = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+        self.nurses = ["A", "B", "C", "D", "E", "F", "G", "H"]
 
         # nurses' respective shift preferences - morning, evening, night:
-        self.shiftPreference = [[1, 0, 0], [1, 1, 0], [0, 0, 1], [0, 1, 0], [0, 0, 1], [1, 1, 1], [0, 1, 1], [1, 1, 1]]
+        self.shiftPreference = [
+            [1, 0, 0],
+            [1, 1, 0],
+            [0, 0, 1],
+            [0, 1, 0],
+            [0, 0, 1],
+            [1, 1, 1],
+            [0, 1, 1],
+            [1, 1, 1],
+        ]
 
         # min and max number of nurses allowed for each shift - morning, evening, night:
         self.shiftMin = [2, 2, 1]
@@ -37,7 +45,6 @@ class NurseSchedulingProblem:
         """
         return len(self.nurses) * self.shiftsPerWeek * self.weeks
 
-
     def getCost(self, schedule):
         """
         Calculates the total cost of the various violations in the given schedule
@@ -47,22 +54,35 @@ class NurseSchedulingProblem:
         """
 
         if len(schedule) != self.__len__():
-            raise ValueError("size of schedule list should be equal to ", self.__len__())
+            raise ValueError(
+                "size of schedule list should be equal to ", self.__len__()
+            )
 
         # convert entire schedule into a dictionary with a separate schedule for each nurse:
         nurseShiftsDict = self.getNurseShifts(schedule)
 
         # count the various violations:
-        consecutiveShiftViolations = self.countConsecutiveShiftViolations(nurseShiftsDict)
+        consecutiveShiftViolations = self.countConsecutiveShiftViolations(
+            nurseShiftsDict
+        )
         shiftsPerWeekViolations = self.countShiftsPerWeekViolations(nurseShiftsDict)[1]
-        nursesPerShiftViolations = self.countNursesPerShiftViolations(nurseShiftsDict)[1]
+        nursesPerShiftViolations = self.countNursesPerShiftViolations(nurseShiftsDict)[
+            1
+        ]
         shiftPreferenceViolations = self.countShiftPreferenceViolations(nurseShiftsDict)
 
         # calculate the cost of the violations:
-        hardContstraintViolations = consecutiveShiftViolations + nursesPerShiftViolations + shiftsPerWeekViolations
+        hardContstraintViolations = (
+            consecutiveShiftViolations
+            + nursesPerShiftViolations
+            + shiftsPerWeekViolations
+        )
         softContstraintViolations = shiftPreferenceViolations
 
-        return self.hardConstraintPenalty * hardContstraintViolations + softContstraintViolations
+        return (
+            self.hardConstraintPenalty * hardContstraintViolations
+            + softContstraintViolations
+        )
 
     def getNurseShifts(self, schedule):
         """
@@ -75,7 +95,7 @@ class NurseSchedulingProblem:
         shiftIndex = 0
 
         for nurse in self.nurses:
-            nurseShiftsDict[nurse] = schedule[shiftIndex:shiftIndex + shiftsPerNurse]
+            nurseShiftsDict[nurse] = schedule[shiftIndex : shiftIndex + shiftsPerNurse]
             shiftIndex += shiftsPerNurse
 
         return nurseShiftsDict
@@ -108,7 +128,7 @@ class NurseSchedulingProblem:
             # iterate over the shifts of each weeks:
             for i in range(0, self.weeks * self.shiftsPerWeek, self.shiftsPerWeek):
                 # count all the '1's over the week:
-                weeklyShifts = sum(nurseShifts[i:i + self.shiftsPerWeek])
+                weeklyShifts = sum(nurseShifts[i : i + self.shiftsPerWeek])
                 weeklyShiftsList.append(weeklyShifts)
                 if weeklyShifts > self.maxShiftsPerWeek:
                     violations += weeklyShifts - self.maxShiftsPerWeek
@@ -127,10 +147,12 @@ class NurseSchedulingProblem:
         violations = 0
         # iterate over all shifts and count violations:
         for shiftIndex, numOfNurses in enumerate(totalPerShiftList):
-            dailyShiftIndex = shiftIndex % self.shiftPerDay  # -> 0, 1, or 2 for the 3 shifts per day
-            if (numOfNurses > self.shiftMax[dailyShiftIndex]):
+            dailyShiftIndex = (
+                shiftIndex % self.shiftPerDay
+            )  # -> 0, 1, or 2 for the 3 shifts per day
+            if numOfNurses > self.shiftMax[dailyShiftIndex]:
                 violations += numOfNurses - self.shiftMax[dailyShiftIndex]
-            elif (numOfNurses < self.shiftMin[dailyShiftIndex]):
+            elif numOfNurses < self.shiftMin[dailyShiftIndex]:
                 violations += self.shiftMin[dailyShiftIndex] - numOfNurses
 
         return totalPerShiftList, violations
@@ -164,15 +186,22 @@ class NurseSchedulingProblem:
         for nurse in nurseShiftsDict:  # all shifts of a single nurse
             print(nurse, ":", nurseShiftsDict[nurse])
 
-        print("consecutive shift violations = ", self.countConsecutiveShiftViolations(nurseShiftsDict))
+        print(
+            "consecutive shift violations = ",
+            self.countConsecutiveShiftViolations(nurseShiftsDict),
+        )
         print()
 
-        weeklyShiftsList, violations = self.countShiftsPerWeekViolations(nurseShiftsDict)
+        weeklyShiftsList, violations = self.countShiftsPerWeekViolations(
+            nurseShiftsDict
+        )
         print("weekly Shifts = ", weeklyShiftsList)
         print("Shifts Per Week Violations = ", violations)
         print()
 
-        totalPerShiftList, violations = self.countNursesPerShiftViolations(nurseShiftsDict)
+        totalPerShiftList, violations = self.countNursesPerShiftViolations(
+            nurseShiftsDict
+        )
         print("Nurses Per Shift = ", totalPerShiftList)
         print("Nurses Per Shift Violations = ", violations)
         print()
@@ -180,6 +209,7 @@ class NurseSchedulingProblem:
         shiftPreferenceViolations = self.countShiftPreferenceViolations(nurseShiftsDict)
         print("Shift Preference Violations = ", shiftPreferenceViolations)
         print()
+
 
 # testing the class:
 def main():
