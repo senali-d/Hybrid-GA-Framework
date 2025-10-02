@@ -7,12 +7,12 @@ from src.problems.timetabling import TimetablingProblem
 
 DEFAULT_GA_PARAMS = {
     # tsp
-    # "POPULATION_SIZE": 200,
-    # "MAX_GENERATIONS": 300,
+    "POPULATION_SIZE": 30,
+    "MAX_GENERATIONS": 50,
 
     # rosenbrock
-    "POPULATION_SIZE": 100,
-    "MAX_GENERATIONS": 10000,
+    # "POPULATION_SIZE": 100,
+    # "MAX_GENERATIONS": 100,
 
     # knapsack
     # "POPULATION_SIZE": 50,
@@ -26,10 +26,7 @@ DEFAULT_GA_PARAMS = {
     # "POPULATION_SIZE": 150,
     # "MAX_GENERATIONS": 600,
 
-    "HALL_OF_FAME_SIZE": 30,
-    # "HALL_OF_FAME_SIZE": 1,
-
-    "P_CROSSOVER": 0.9,
+    "P_CROSSOVER": 0.6,
     "P_MUTATION": 0.1,
     "SEED": 42,
 }

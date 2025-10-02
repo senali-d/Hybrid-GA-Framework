@@ -21,19 +21,10 @@ def main():
         crossover_prob=ga_params['P_CROSSOVER'],
         mutation_prob=ga_params["P_MUTATION"],
         maximize=cfg["maximize"],
-        hall_of_fame_size=ga_params["HALL_OF_FAME_SIZE"],
-        seed=ga_params["SEED"],
         **extra
     )
 
-    best, fitness, logbook = ga.run()
-
-    print("Best solution:", best)
-    print("Fitness:", fitness[0])
-
-    # Plot the solution if supported
-    if cfg["plot_func"] is not None:
-        cfg["plot_func"](best)
+    logbook = ga.run()
 
     # Extract statistics
     stat1, stat2 = cfg["stats"]
@@ -42,8 +33,8 @@ def main():
     # Plot statistics
     plt.figure()
     sns.set_style("whitegrid")
-    plt.plot(values1, color='red')
-    plt.plot(values2, color='green')
+    plt.plot(values1, color='red') #min/max
+    plt.plot(values2, color='green') #avg
     plt.xlabel('Generation')
     plt.ylabel(f"{stat1.capitalize()} / {stat2.capitalize()} Fitness")
     plt.title(f"{stat1.capitalize()} and {stat2.capitalize()} Fitness over Generations")
