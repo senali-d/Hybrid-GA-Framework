@@ -208,3 +208,4 @@ __marimo__/
 
 .idea
 .hybrid-ga-framework-env
+*.pickle
