@@ -6,9 +6,9 @@ class RosenbrockProblem:
     """This class encapsulates the Rosenbrock Function optimization problem"""
 
     """
-  Rosenbrock function in 2D: f(x, y) = (a - x)² + b(y - x²)²
-  Rosenbrock function in nD: f(x) = Σ [b(x_{i+1} - x_i²)² + (a - x_i)²]
-  """
+    Rosenbrock function in 2D: f(x, y) = (a - x)² + b(y - x²)²
+    Rosenbrock function in nD: f(x) = Σ [b(x_{i+1} - x_i²)² + (a - x_i)²]
+    """
 
     def __init__(self, dimensions=2, a=1, b=100):
         """

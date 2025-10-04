@@ -3,9 +3,39 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from config.setting import PROBLEMS, DEFAULT_GA_PARAMS
 
-# from src.problems.timetabling import TimetablingProblem
+PROBLEM = "timetabling"  # options: "tsp", "knapsack", "nurses", "timetabling", "rosenbrock, "integer", "real"
 
-PROBLEM = "rosenbrock"  # options: "tsp", "knapsack", "nurses", "timetabling", "rosenbrock, "integer", "real"
+
+def plot_fitness(max_fitness_values, mean_fitness_values, maximize=True):
+    """
+    Dynamically plot fitness evolution for GA runs.
+    Automatically handles minimization or maximization.
+    """
+    sns.set_style("whitegrid")
+    plt.figure()
+
+    if maximize:
+        main_label = "Max Fitness"
+        avg_label = "Mean Fitness"
+        main_color = "red"
+        better_text = "higher"
+    else:
+        main_label = "Min Fitness"
+        avg_label = "Mean Fitness"
+        main_color = "blue"
+        better_text = "lower"
+
+    # Plot the curves
+    plt.plot(max_fitness_values, color=main_color, label=main_label)
+    plt.plot(mean_fitness_values, color="green", label=avg_label)
+
+    plt.xlabel("Generation")
+    plt.ylabel("Fitness Value")
+    plt.title(
+        f"{main_label} and {avg_label} over Generations\n(Better = {better_text})"
+    )
+    plt.legend()
+    plt.show()
 
 
 def main():
@@ -26,21 +56,17 @@ def main():
         **extra,
     )
 
-    logbook = ga.run()
+    results = ga.run()
 
-    # Extract statistics
-    stat1, stat2 = cfg["stats"]
-    values1, values2 = logbook.select(stat1, stat2)
+    if ga.maximize:
+        fitness_curve = results["max_fitness_values"]
+    else:
+        fitness_curve = results["min_fitness_values"]
 
-    # Plot statistics
-    plt.figure()
-    sns.set_style("whitegrid")
-    plt.plot(values1, color="red")  # min/max
-    plt.plot(values2, color="green")  # avg
-    plt.xlabel("Generation")
-    plt.ylabel(f"{stat1.capitalize()} / {stat2.capitalize()} Fitness")
-    plt.title(f"{stat1.capitalize()} and {stat2.capitalize()} Fitness over Generations")
-    plt.show()
+    mean_curve = results["mean_fitness_values"]
+
+    # Plot
+    plot_fitness(fitness_curve, mean_curve, maximize=ga.maximize)
 
 
 if __name__ == "__main__":

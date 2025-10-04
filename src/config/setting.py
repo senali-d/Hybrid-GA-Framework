@@ -7,14 +7,14 @@ from src.problems.timetabling import TimetablingProblem
 
 DEFAULT_GA_PARAMS = {
     # tsp
-    "POPULATION_SIZE": 30,
-    "MAX_GENERATIONS": 50,
+    # "POPULATION_SIZE": 300,
+    # "MAX_GENERATIONS": 200,
     # rosenbrock
-    # "POPULATION_SIZE": 100,
-    # "MAX_GENERATIONS": 100,
+    "POPULATION_SIZE": 50,
+    "MAX_GENERATIONS": 100,
     # knapsack
     # "POPULATION_SIZE": 50,
-    # "MAX_GENERATIONS": 100,
+    # "MAX_GENERATIONS": 50,
     # nursing
     # "POPULATION_SIZE": 300,
     # "MAX_GENERATIONS": 200,
